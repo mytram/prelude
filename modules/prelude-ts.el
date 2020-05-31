@@ -30,11 +30,14 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(tide))
+(prelude-require-packages '(tide prettier-js))
 
 (require 'typescript-mode)
+(require 'prettier-js)
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.tjs\\'". typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'". typescript-mode))
 
 (with-eval-after-load 'typescript-mode
   (defun prelude-ts-mode-defaults ()
@@ -53,7 +56,8 @@
 
   (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
 
-  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook))))
+  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook)))
+  (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 (provide 'prelude-ts)
 
