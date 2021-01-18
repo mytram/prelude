@@ -32,7 +32,7 @@
 
 (require 'prelude-programming)
 
-(prelude-require-packages '(inf-ruby yari))
+(prelude-require-packages '(inf-ruby yari rubocopfmt rspec-mode))
 
 ;; We never want to edit Rubinius bytecode
 (add-to-list 'completion-ignored-extensions ".rbc")
@@ -47,7 +47,9 @@
     (setq ruby-insert-encoding-magic-comment nil)
     (inf-ruby-minor-mode +1)
     ;; CamelCase aware editing operations
-    (subword-mode +1))
+    (subword-mode +1)
+    (rubocop-mode +1)
+    (rubocopfmt-mode +1))
 
   (setq prelude-ruby-mode-hook 'prelude-ruby-mode-defaults)
 

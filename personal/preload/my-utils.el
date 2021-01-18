@@ -57,25 +57,20 @@
 (defun small-font ()
   "Set small font."
   (interactive)
-  (dot-set-font "Fira Mono for Powerline" "15"))
-                                        ; (dot-sEt-Font "Source Code Pro for Powerline" "16"))
-  ; (dot-set-font "Ubuntu Mono derivative Powerline" "14"))
-                                        ;(dot-set-font "Source code Pro for Power line", "14"))
+  (dot-set-font "FiraCode Nerd Font" "14"))
+                                        ; (dot-set-font "Hack Nerd Font" "14"))
+
+;  (dot-set-font "MesloLGS Nerd Font" "14"))
 
 (defun big-font ()
   "Set big font."
   (interactive)
-  ; (dot-set-font "Source Code Pro for Powerline" "16"))
-  (dot-set-font "Fira Mono for Powerline" "16"))
-                                        ; (dot-set-font "Ubuntu Mono derivative Powerline" "15"))
-
-; (big-font)
-
+  (dot-set-font "MesloLGS Nerd Font" "15"))
+                                        ;
 (defun large-font ()
   "Set big font."
   (interactive)
-;  (dot-set-font "Ubuntu Mono derivative Powerline" "17"))
-  (dot-set-font "Fira Mono for Powerline" "18"))
+  (dot-set-font "MesloLGS Nerd Font" "16"))
 
 (big-font)
 

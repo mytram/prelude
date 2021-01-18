@@ -30,10 +30,11 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(tide prettier-js))
+(prelude-require-packages '(tide prettier-js web-mode))
 
 (require 'typescript-mode)
-(require 'prettier-js)
+
+(setq prettier-js-args '("--tab-width" "2"))
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.tjs\\'". typescript-mode))
@@ -45,7 +46,9 @@
     (tide-setup)
     (flycheck-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
+    (setq-default typescript-indent-level 2)
     (eldoc-mode +1)
+    (prettier-js-mode +1)
     (tide-hl-identifier-mode +1))
 
   ;; formats the buffer before saving
@@ -56,8 +59,7 @@
 
   (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
 
-  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook)))
-  (add-hook 'typescript-mode-hook 'prettier-js-mode))
+  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook))))
 
 (provide 'prelude-ts)
 
