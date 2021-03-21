@@ -43,6 +43,14 @@
 
 (define-key 'help-command (kbd "G") 'godoc)
 
+(require 'lsp-mode)
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
 (with-eval-after-load 'go-mode
   (defun prelude-go-mode-defaults ()
     ;; Add to default go-mode key bindings
@@ -60,6 +68,7 @@
 
     ;; gofmt on save
     (add-hook 'before-save-hook 'gofmt-before-save nil t)
+    (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
     ;; stop whitespace being highlighted
     (whitespace-toggle-options '(tabs))
@@ -75,6 +84,7 @@
 
   (setq prelude-go-mode-hook 'prelude-go-mode-defaults)
 
+  (add-hook 'go-mode-hook #'lsp-deferred)
   (add-hook 'go-mode-hook (lambda ()
                             (run-hooks 'prelude-go-mode-hook))))
 

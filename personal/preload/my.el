@@ -5,4 +5,4 @@
 ; (disable-theme 'smart-mode-line-dark-theme)
 ; (load-theme 'smart-mode-line-dark-theme)
 ; (require 'multiple-cursors)
-(setq-default kotlin-tab-width 4)
+; (setq-default kotlin-tab-width 4)
