@@ -3,6 +3,8 @@
 ;; Copyright © 2011-2020 LEE Dongjun
 ;;
 ;; Author: LEE Dongjun <redongjun@gmail.com>
+;; Version: 1.0.0
+;; Keywords: convenience typescript
 
 ;; This file is not part of GNU Emacs.
 
@@ -30,25 +32,18 @@
 ;;; Code:
 
 (require 'prelude-programming)
-(prelude-require-packages '(tide prettier-js web-mode))
+(prelude-require-packages '(tide prettier-js))
 
 (require 'typescript-mode)
+(require 'prettier-js)
 
-(setq prettier-js-args '("--tab-width" "2"))
+(setq prettier-js-args '(
+                         "--tab-width" "2"
+                         ))
 
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.tjs\\'". typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'". typescript-mode))
-
-(defun eslint-fix-file ()
-  (interactive)
-  (message "eslint --fixing the file" (buffer-file-name))
-  (shell-command (concat "yarn eslint --fix " (buffer-file-name))))
-
-(defun eslint-fix-file-and-revert ()
-  (interactive)
-  (eslint-fix-file)
-  (revert-buffer t t))
 
 (with-eval-after-load 'typescript-mode
   (defun prelude-ts-mode-defaults ()
@@ -56,20 +51,19 @@
     (tide-setup)
     (flycheck-mode +1)
     (setq flycheck-check-syntax-automatically '(save mode-enabled))
-    (setq-default typescript-indent-level 2)
     (eldoc-mode +1)
-    (prettier-js-mode +1)
     (tide-hl-identifier-mode +1))
 
   ;; formats the buffer before saving
-  ;; (add-hook 'before-save-hook
-  ;;           (lambda ()
-  ;;             (when prelude-format-on-save
-  ;;               (tide-format-before-save))))
+  (add-hook 'before-save-hook
+            (lambda ()
+              (when prelude-format-on-save
+                (tide-format-before-save))))
 
   (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
 
-  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook))))
+  (add-hook 'typescript-mode-hook (lambda () (run-hooks 'prelude-ts-mode-hook)))
+  (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 (provide 'prelude-ts)
 

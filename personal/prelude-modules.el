@@ -1,7 +1,7 @@
 ;;; Uncomment the modules you'd like to use and restart Prelude afterwards
 
 ;; Emacs IRC client
-                                        ; (require 'prelude-erc)
+; (require 'prelude-erc)
 (require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
 (require 'prelude-ivy) ;; A mighty modern alternative to ido
 (require 'prelude-helm) ;; Interface for narrowing and search
@@ -19,7 +19,7 @@
 (require 'prelude-emacs-lisp)
 ;; (require 'prelude-erlang)
 ;; (require 'prelude-elixir)
-(require 'prelude-go)
+;; (require 'prelude-go)
 ;; (require 'prelude-haskell)
 (require 'prelude-js)
 ;; (require 'prelude-latex)
@@ -38,15 +38,10 @@
 (require 'prelude-ts)
 (require 'prelude-web) ;; Emacs mode for web templates
 (require 'prelude-xml)
-(require 'prelude-yaml)
+;; (require 'prelude-yaml)
 (require 'my-utils)
 
 (require 'prettier-js)
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 
 (setq web-mode-markup-indent-offset 2)
-
-(add-hook 'json-mode-hook
-          (lambda ()
-            (make-local-variable 'js-indent-level)
-            (setq js-indent-level 2)))

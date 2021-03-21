@@ -4,6 +4,8 @@
 ;;
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/prelude
+;; Version: 1.0.0
+;; Keywords: convenience
 
 ;; This file is not part of GNU Emacs.
 
@@ -44,8 +46,8 @@
     (setq-local electric-layout-rules '((?\; . after)))
     (setq mode-name "JS2")
     (js2-imenu-extras-mode +1)
-    (subword-mode +1))
-  (prettier-js-mode +1)
+    (prettier-js-mode +1))
+
   (setq prelude-js-mode-hook 'prelude-js-mode-defaults)
 
   (add-hook 'js2-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook))))
