@@ -40,6 +40,16 @@
 (add-to-list 'auto-mode-alist '("\\.tjs\\'". typescript-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'". typescript-mode))
 
+(defun eslint-fix-file ()
+  (interactive)
+  (message "eslint --fixing the file" (buffer-file-name))
+  (shell-command (concat "yarn eslint --fix " (buffer-file-name))))
+
+(defun eslint-fix-file-and-revert ()
+  (interactive)
+  (eslint-fix-file)
+  (revert-buffer t t))
+
 (with-eval-after-load 'typescript-mode
   (defun prelude-ts-mode-defaults ()
     (interactive)
@@ -52,10 +62,10 @@
     (tide-hl-identifier-mode +1))
 
   ;; formats the buffer before saving
-  (add-hook 'before-save-hook
-            (lambda ()
-              (when prelude-format-on-save
-                (tide-format-before-save))))
+  ;; (add-hook 'before-save-hook
+  ;;           (lambda ()
+  ;;             (when prelude-format-on-save
+  ;;               (tide-format-before-save))))
 
   (setq prelude-ts-mode-hook 'prelude-ts-mode-defaults)
 

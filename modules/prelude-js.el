@@ -45,8 +45,7 @@
     (setq mode-name "JS2")
     (js2-imenu-extras-mode +1)
     (subword-mode +1))
-  (prettier-js-mode +1))
-
+  (prettier-js-mode +1)
   (setq prelude-js-mode-hook 'prelude-js-mode-defaults)
 
   (add-hook 'js2-mode-hook (lambda () (run-hooks 'prelude-js-mode-hook))))
